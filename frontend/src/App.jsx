@@ -121,17 +121,27 @@ function App() {
     setView('dashboard');
   };
 
-  const handleGenerateMasterProfile = async () => {
-    if (isGuest) return toast.error("Please sign in with Google to use AI synthesis.");
+const handleGenerateMasterProfile = async () => {
+    // Check if user is logged in
+    if (!user) {
+        return toast.error("Please sign in with Google to use AI synthesis.");
+    }
+
     setIsSynthesizing(true);
-    setView('processing');
+    setView('processing'); 
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/synthesize-profile`);
-      setMasterProfile(res.data);
-      setView('dashboard');
-      toast.success("Master Profile Synced!");
-    } catch (err) {
-      toast.error("Analysis failed. Ensure you have uploaded documents.");
+      const token = await user.getIdToken();
+      const response = await axios.post(`${API_BASE_URL}/api/synthesize-profile`, {}, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      setMasterProfile(response.data);
+      
+      // FIXED: Replaced alert with toast
+      toast.success("Master Profile generated successfully!"); 
+      setView('dashboard'); 
+    } catch (error) {
+      // FIXED: Replaced alert with toast
+      toast.error("Could not generate Master Profile. Ensure you have 2+ documents uploaded."); 
       setView('dashboard');
     } finally {
       setIsSynthesizing(false);
