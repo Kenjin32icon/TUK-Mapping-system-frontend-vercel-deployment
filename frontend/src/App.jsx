@@ -141,7 +141,7 @@ function App() {
     
     try {
       const token = await user.getIdToken();
-      const response = await axios.post('https://tuk-mapping-system.onrender.com/api/analyze-data', formData, {
+      const response = await axios.post('${import.meta.env.VITE_API_URL}/api/user-settings', formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setProfile(response.data);
@@ -160,7 +160,7 @@ function App() {
     setView('processing'); 
     try {
       const token = await user.getIdToken();
-      const response = await axios.post('https://tuk-mapping-system.onrender.com/api/synthesize-profile', {}, {
+      const response = await axios.post('${import.meta.env.VITE_API_URL}/api/user-settings', {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMasterProfile(response.data);
@@ -180,7 +180,7 @@ function App() {
     setView('processing'); 
     try {
         const token = await user.getIdToken();
-        const response = await axios.post('https://tuk-mapping-system.onrender.com/api/generate-portfolio', {
+        const response = await axios.post('${import.meta.env.VITE_API_URL}/api/user-settings', {
             masterProfile,
             serviceName: service.service_name,
             serviceDescription: service.description

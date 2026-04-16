@@ -14,7 +14,7 @@ export default function ProfileSettings({ user, isAdmin }) {
     const fetchSettings = async () => {
       try {
         const token = await auth.currentUser.getIdToken();
-        const response = await axios.get('https://tuk-mapping-system.onrender.com/api/user-settings', {
+        const response = await axios.get('${import.meta.env.VITE_API_URL}/api/user-settings', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setPhone(response.data.phone || '');
