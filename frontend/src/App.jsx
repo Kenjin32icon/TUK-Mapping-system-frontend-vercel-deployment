@@ -62,6 +62,8 @@ const MOCK_GUEST_PROFILE = {
 
 // Constants
 const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://tuk-mapping-system.onrender.com';
+// 1. Add this new state variable at the top of your App function:
+const [isAuthSyncing, setIsAuthSyncing] = useState(true);
 
 function App() {
   const [user, setUser] = useState(null);
@@ -69,28 +71,43 @@ function App() {
   const [view, setView] = useState('landing');
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        try {
-          const token = await currentUser.getIdToken();
-          // Set axios default header for all subsequent calls
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-          
-          const res = await axios.get(`${API_BASE_URL}/api/user-profile`);
-          setUserRole(res.data.role);
-          setView(res.data.role === 'SUPER_ADMIN' ? 'admin_dashboard' : 'dashboard');
-        } catch (err) {
-          console.error("Auth sync failed", err);
-          setView('onboarding');
-        }
-      } else {
-        setView('landing');
+  // 2. Update your useEffect auth listener to handle the loading state:
+useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+    if (userRole === 'GUEST') return; 
+
+    setUser(currentUser);
+    if (currentUser) {
+      setIsAuthSyncing(true); // START LOADING SPINNER
+      try {
+        const token = await currentUser.getIdToken();
+        const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/sync-user`, {}, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        
+        const role = response.data.role;
+        setUserRole(role);
+
+        if (role === 'SUPER_ADMIN') setView('dev_dashboard');
+        else if (role === 'UNIVERSITY_ADMIN') setView('admin_dashboard');
+        else if (role === 'GOVT_ADMIN') setView('govt_dashboard'); 
+        else setView('onboarding'); 
+
+      } catch (error) {
+        console.error("Failed to sync user role.", error);
+        alert("Failed to connect to the server. Please try refreshing the page.");
+        setView('landing'); 
+      } finally {
+        setIsAuthSyncing(false); // STOP LOADING SPINNER
       }
-    });
-    return () => unsubscribe();
-  }, []);
+    } else {
+      setView('landing');
+      setUserRole(null);
+      setIsAuthSyncing(false); // STOP LOADING SPINNER
+    }
+  });
+  return () => unsubscribe();
+}, [userRole]);
 
   const handleLogin = async () => {
     try { await signInWithPopup(auth, googleProvider); } 
