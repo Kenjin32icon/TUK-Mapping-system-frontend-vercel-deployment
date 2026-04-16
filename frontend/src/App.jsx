@@ -1,4 +1,3 @@
-// src/App.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
@@ -26,7 +25,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 // --- MOCK DATA FOR GUEST MODE ---
 const MOCK_GUEST_PROFILE = {
-  bio: "A highly motivated aspiring tech professional with a strong foundation in scalable software development. Testing system capabilities in Guest Mode.",
+  bio: "A highly motivated aspiring tech professional with a strong foundation in software development. Testing system capabilities in Guest Mode.",
   skills: {
     technical: ["JavaScript", "React.js", "Node.js", "Python", "SQL"],
     soft: ["Problem Solving", "Adaptability", "Team Collaboration"],
@@ -42,7 +41,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null); 
   const [view, setView] = useState('landing');
-  const [profile, setProfile] = useState(null);
   const [masterProfile, setMasterProfile] = useState(null);
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -50,14 +48,17 @@ function App() {
   const [isGeneratingPortfolio, setIsGeneratingPortfolio] = useState(false);
   const [isGuest, setIsGuest] = useState(false);
 
-  // CORRECTION: Added state for Render Cold-Start handling
+  // FIX: Added state variable to handle Render Cold-Start/Identity Syncing
   const [isAuthSyncing, setIsAuthSyncing] = useState(true);
 
-  // CORRECTION: Updated Auth Listener for Production Syncing
+  // FIX: Updated auth listener to sync user identity and role from backend
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      // If we are in Guest mode, don't try to sync with Firebase
-      if (isGuest) return; 
+      // Don't run production sync if user is manually exploring in Guest Mode
+      if (isGuest) {
+        setIsAuthSyncing(false);
+        return;
+      }
 
       setUser(currentUser);
       
@@ -65,28 +66,31 @@ function App() {
         setIsAuthSyncing(true); // START LOADING SPINNER
         try {
           const token = await currentUser.getIdToken();
-          // Configure axios for all future requests
-          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-          // Wake up Render and get user role/data
-          const response = await axios.post(`${API_BASE_URL}/api/sync-user`, {});
           
-          const { role, masterProfile: existingMaster } = response.data;
+          // Securely sync identity with Render Backend
+          const response = await axios.post(`${API_BASE_URL}/api/sync-user`, {}, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          
+          const { role, masterProfile: existingProfile } = response.data;
           setUserRole(role);
-          setMasterProfile(existingMaster);
+          setMasterProfile(existingProfile);
 
-          // Role-Based Routing
-          if (role === 'SUPER_ADMIN') setView('dev_dashboard');
-          else if (role === 'UNIVERSITY_ADMIN') setView('admin_dashboard');
-          else if (role === 'GOVT_ADMIN') setView('govt_dashboard'); 
-          else {
-            // If they have a master profile, go to dashboard, else onboarding
-            setView(existingMaster ? 'dashboard' : 'onboarding');
+          // Route to specific dashboards based on Backend Role
+          if (role === 'SUPER_ADMIN') {
+            setView('dev_dashboard');
+          } else if (role === 'UNIVERSITY_ADMIN') {
+            setView('admin_dashboard');
+          } else if (role === 'GOVT_ADMIN') {
+            setView('govt_dashboard');
+          } else {
+            // Default Student routing
+            setView(existingProfile ? 'dashboard' : 'onboarding');
           }
 
         } catch (error) {
-          console.error("Failed to sync user identity with Render:", error);
-          toast.error("Server connection timeout. Retrying...");
+          console.error("Failed to sync user role with backend.", error);
+          toast.error("Connection timeout. Please refresh or try again in a moment.");
           setView('landing'); 
         } finally {
           setIsAuthSyncing(false); // STOP LOADING SPINNER
@@ -94,13 +98,13 @@ function App() {
       } else {
         setView('landing');
         setUserRole(null);
-        setIsAuthSyncing(false);
+        setIsAuthSyncing(false); // STOP LOADING SPINNER
       }
     });
     return () => unsubscribe();
   }, [isGuest]);
 
-  // Handlers
+  // UI Handlers
   const handleLogout = () => {
     signOut(auth);
     setIsGuest(false);
@@ -111,23 +115,23 @@ function App() {
 
   const enterGuestMode = () => {
     setIsGuest(true);
-    setUser({ displayName: "Guest User", email: "guest@example.com" });
+    setUser({ displayName: "Guest Student", email: "guest@tuk.ac.ke" });
     setUserRole('STUDENT');
     setMasterProfile(MOCK_GUEST_PROFILE);
     setView('dashboard');
   };
 
   const handleGenerateMasterProfile = async () => {
-    if (isGuest) return toast.error("Please sign in to use AI Synthesis.");
+    if (isGuest) return toast.error("Please sign in with Google to use AI synthesis.");
     setIsSynthesizing(true);
     setView('processing');
     try {
       const res = await axios.post(`${API_BASE_URL}/api/synthesize-profile`);
       setMasterProfile(res.data);
       setView('dashboard');
-      toast.success("Master Profile Generated!");
+      toast.success("Master Profile Synced!");
     } catch (err) {
-      toast.error("Synthesis failed. Check if you have uploaded enough documents.");
+      toast.error("Analysis failed. Ensure you have uploaded documents.");
       setView('dashboard');
     } finally {
       setIsSynthesizing(false);
@@ -135,7 +139,7 @@ function App() {
   };
 
   const handlePreparePortfolio = async (service) => {
-    if (isGuest) return toast.error("Sign in to generate portfolios.");
+    if (isGuest) return toast.error("Sign in to generate targeted portfolios.");
     setIsGeneratingPortfolio(true);
     setView('processing');
     try {
@@ -147,7 +151,7 @@ function App() {
       setPortfolioData(res.data);
       setView('module_portfolio');
     } catch (err) {
-      toast.error("Portfolio generation failed.");
+      toast.error("Failed to generate blueprint.");
       setView('module_services');
     } finally {
       setIsGeneratingPortfolio(false);
@@ -158,7 +162,7 @@ function App() {
     const element = document.getElementById(elementId);
     const opt = {
       margin: 10,
-      filename: `TU-K-Career-Asset-${Date.now()}.pdf`,
+      filename: `TUK-Career-Asset-${Date.now()}.pdf`,
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
@@ -168,23 +172,22 @@ function App() {
 
   // --- RENDERING LOGIC ---
 
-  // 1. Loading Screen for Cold Starts
+  // FIX: Render "Waking up" screen if waiting for backend response (Causes 1, 2, 3)
   if (isAuthSyncing) {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
-          <div className="relative w-20 h-20 mb-8">
+          <div className="relative w-20 h-20 mb-6">
             <div className="absolute inset-0 border-4 border-emerald-500/20 rounded-full"></div>
             <div className="absolute inset-0 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
           </div>
           <h2 className="text-2xl font-bold text-slate-800 mb-2">Waking up the AI...</h2>
           <p className="text-slate-500 max-w-sm">
-            Securely connecting to the TU-K database. This might take up to 40 seconds on the first load due to server cold-start.
+            Securely connecting to the TU-K database. This might take up to 40 seconds on the first load while the server spins up.
           </p>
       </div>
     );
   }
 
-  // 2. Main Application UI
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       <Toaster position="top-center" />
@@ -205,7 +208,7 @@ function App() {
         {view === 'onboarding' && (
           <OnboardingView 
             user={user} 
-            onFileChange={() => toast.success("File uploaded!")} 
+            onFileChange={() => toast.success("File uploaded to queue.")} 
             isUploading={loading} 
             onSkip={() => setView('dashboard')}
           />
@@ -214,8 +217,8 @@ function App() {
         {view === 'processing' && (
           <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center">
              <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-             <h3 className="text-2xl font-bold">
-                {isSynthesizing ? 'Synthesizing Master Profile...' : 'Crafting Portfolio Blueprint...'}
+             <h3 className="text-2xl font-bold text-slate-800">
+                {isSynthesizing ? 'Synthesizing Master Profile...' : 'AI is mapping your potential...'}
              </h3>
           </div>
         )}
@@ -232,6 +235,13 @@ function App() {
         )}
         
         {view === 'admin_dashboard' && <AdminDashboardView />}
+        {view === 'dev_dashboard' && (
+          <div className="p-8 bg-white rounded-3xl shadow-xl border border-slate-100">
+            <h2 className="text-2xl font-bold mb-4">Developer Super-Panel</h2>
+            <p className="text-slate-600">Full system oversight and analytics access granted.</p>
+          </div>
+        )}
+
         {view === 'settings' && <ProfileSettings user={user} isAdmin={userRole === 'SUPER_ADMIN'} />}
 
         {/* Module Routing */}
