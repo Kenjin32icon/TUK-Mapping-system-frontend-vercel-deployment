@@ -148,7 +148,8 @@ function App() {
       setProfile(response.data);
       setView('dashboard');
     } catch (error) {
-      alert("Error analyzing documents.");
+      const errorMsg = error.response?.data?.error || "Error analyzing documents.";
+      toast.error(errorMsg); // Using the toast from step 2
       setView('onboarding');
     }
     setLoading(false);

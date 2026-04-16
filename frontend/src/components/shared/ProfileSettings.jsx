@@ -2,6 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Mail, Shield, Save, Settings, Loader2 } from 'lucide-react';
 import { auth } from '../../firebase'; // ⬅️ UPDATED PATH (Two folders up)
+import { toast } from 'react-hot-toast';
+
+// Inside handleSave:
+toast.success("Settings saved successfully!");
+// For errors:
+toast.error("Failed to save settings.");
 
 export default function ProfileSettings({ user, isAdmin }) {
   const [phone, setPhone] = useState('');
