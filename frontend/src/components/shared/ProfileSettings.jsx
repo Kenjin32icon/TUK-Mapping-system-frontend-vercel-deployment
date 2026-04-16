@@ -14,7 +14,7 @@ export default function ProfileSettings({ user, isAdmin }) {
     const fetchSettings = async () => {
       try {
         const token = await auth.currentUser.getIdToken();
-        const response = await axios.get('http://localhost:5000/api/user-settings', {
+        const response = await axios.get('https://tuk-mapping-system.onrender.com/api/user-settings', {
           headers: { Authorization: `Bearer ${token}` }
         });
         setPhone(response.data.phone || '');
@@ -33,7 +33,7 @@ export default function ProfileSettings({ user, isAdmin }) {
     setIsSaving(true);
     try {
       const token = await auth.currentUser.getIdToken();
-      await axios.post('http://localhost:5000/api/update-settings', { phone, portfolio }, {
+      await axios.post('https://tuk-mapping-system.onrender.com/api/update-settings', { phone, portfolio }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       alert("Settings saved successfully!");

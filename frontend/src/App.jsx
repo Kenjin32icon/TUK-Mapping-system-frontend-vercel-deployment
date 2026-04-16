@@ -81,7 +81,7 @@ function App() {
       if (currentUser) {
         try {
           const token = await currentUser.getIdToken();
-          const response = await axios.post('http://localhost:5000/api/sync-user', {}, {
+          const response = await axios.post('https://tuk-mapping-system.onrender.com/api/sync-user', {}, {
             headers: { Authorization: `Bearer ${token}` }
           });
           
@@ -153,7 +153,7 @@ function App() {
     
     try {
       const token = await user.getIdToken();
-      const response = await axios.post('http://localhost:5000/api/analyze-data', formData, {
+      const response = await axios.post('https://tuk-mapping-system.onrender.com/api/analyze-data', formData, {
         headers: { 'Content-Type': 'multipart/form-data', Authorization: `Bearer ${token}` }
       });
       setProfile(response.data);
@@ -172,7 +172,7 @@ function App() {
     setView('processing'); 
     try {
       const token = await user.getIdToken();
-      const response = await axios.post('http://localhost:5000/api/synthesize-profile', {}, {
+      const response = await axios.post('https://tuk-mapping-system.onrender.com/api/synthesize-profile', {}, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMasterProfile(response.data);
@@ -192,7 +192,7 @@ function App() {
     setView('processing'); 
     try {
         const token = await user.getIdToken();
-        const response = await axios.post('http://localhost:5000/api/generate-portfolio', {
+        const response = await axios.post('https://tuk-mapping-system.onrender.com/api/generate-portfolio', {
             masterProfile,
             serviceName: service.service_name,
             serviceDescription: service.description
