@@ -1,9 +1,8 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import html2pdf from 'html2pdf.js';
-import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { auth, googleProvider } from './firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { auth } from './firebase';
 
 // Shared Components
 import LandingView from './components/shared/LandingView';
@@ -60,48 +59,37 @@ const MOCK_GUEST_PROFILE = {
   ]
 };
 
+// Constants
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://tuk-mapping-system.onrender.com';
+
 function App() {
   const [user, setUser] = useState(null);
-  const [userRole, setUserRole] = useState(null); 
+  const [userRole, setUserRole] = useState(null);
   const [view, setView] = useState('landing');
-  
-  const [profile, setProfile] = useState(null);
-  const [masterProfile, setMasterProfile] = useState(null);
-  const [portfolioData, setPortfolioData] = useState(null);
-  
   const [loading, setLoading] = useState(false);
-  const [isSynthesizing, setIsSynthesizing] = useState(false);
-  const [isGeneratingPortfolio, setIsGeneratingPortfolio] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      if (userRole === 'GUEST') return; 
-
       setUser(currentUser);
       if (currentUser) {
         try {
           const token = await currentUser.getIdToken();
-          const response = await axios.post('https://tuk-mapping-system.onrender.com/api/sync-user', {}, {
-            headers: { Authorization: `Bearer ${token}` }
-          });
+          // Set axios default header for all subsequent calls
+          axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
           
-          const role = response.data.role;
-          setUserRole(role);
-
-          if (role === 'SUPER_ADMIN') setView('dev_dashboard');
-          else if (role === 'UNIVERSITY_ADMIN') setView('admin_dashboard');
-          else if (role === 'GOVT_ADMIN') setView('govt_dashboard'); 
-          else setView('onboarding'); 
-        } catch (error) {
-          console.error("Failed to fetch user role.");
+          const res = await axios.get(`${API_BASE_URL}/api/user-profile`);
+          setUserRole(res.data.role);
+          setView(res.data.role === 'SUPER_ADMIN' ? 'admin_dashboard' : 'dashboard');
+        } catch (err) {
+          console.error("Auth sync failed", err);
+          setView('onboarding');
         }
       } else {
         setView('landing');
-        setUserRole(null);
       }
     });
     return () => unsubscribe();
-  }, [userRole]);
+  }, []);
 
   const handleLogin = async () => {
     try { await signInWithPopup(auth, googleProvider); } 
@@ -281,6 +269,26 @@ function App() {
         {view === 'module_services' && <ServicesModuleView masterProfile={masterProfile} onPrepare={handlePreparePortfolio} />}
         {view === 'module_portfolio' && <PortfolioView portfolioData={portfolioData} onBack={() => setView('module_services')} onDownload={() => downloadPDF('portfolio-export')} />}
       </main>
+    </div>
+  );
+}
+
+// Use API_BASE_URL in your fetch functions:
+  const handleGenerateMasterProfile = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.post(`${API_BASE_URL}/api/synthesize-profile`);
+      // Update state...
+    } catch (err) {
+      alert("Error generating profile");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      {/* Your existing Navbar and Main components */}
     </div>
   );
 }
