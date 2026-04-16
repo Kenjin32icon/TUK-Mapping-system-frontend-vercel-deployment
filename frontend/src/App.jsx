@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase';
+import { Toaster, toast } from 'react-hot-toast';
 
 // Shared Components
 import LandingView from './components/shared/LandingView';
@@ -212,6 +213,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      <Toaster position="top-right" /> {/* ADD THIS */}
       <Navbar 
         user={user} 
         userRole={userRole} 
