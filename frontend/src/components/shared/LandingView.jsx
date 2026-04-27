@@ -45,7 +45,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
       </div>
 
       {/* Right Column: Login Box (Kept mostly the same from your code) */}
-      <div className="md:w-5/12 w-full bg-white p-8 rounded-3xl shadow-xl border border-slate-100">
+      <div className="md:w-5/12 w-full bg-white p-8 rounded-3xl shadow-xl border border-slate-100 login-section">
         <h2 className="text-2xl font-bold text-slate-900 mb-6 text-center">Get Started</h2>
         
         <div className="text-left mb-6">
@@ -75,7 +75,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
 
         <button 
           onClick={onGuestLogin}
-          className="w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold rounded-xl transition-colors border border-slate-200"
+          className="w-full py-3 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold rounded-xl transition-colors border border-slate-200 guest-button"
         >
           Explore as Guest
         </button>

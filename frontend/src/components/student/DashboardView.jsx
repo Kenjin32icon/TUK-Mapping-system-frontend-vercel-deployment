@@ -73,7 +73,7 @@ export default function DashboardView({ user, profile, masterProfile, onDownload
       )}
 
       {/* 1. PERSISTENT MASTER PROFILE ACTION BAR */}
-      <div className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 profile-action-bar">
         <div className="flex items-center gap-4">
           <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center border-2 border-emerald-500 overflow-hidden">
             <img src={user?.photoURL} alt="Profile" crossOrigin="anonymous" className="w-full h-full object-cover" />
