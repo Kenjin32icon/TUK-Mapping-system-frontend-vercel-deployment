@@ -56,14 +56,6 @@ const MOCK_GUEST_PROFILE = {
 };
 
 function App() {
-  // 1. Add the state to control the tour
-  const [showOnboardingTour, setShowOnboardingTour] = useState(false);
-
-  // 2. Add the function to close the tour
-  const handleTourComplete = () => {
-    setShowOnboardingTour(false);
-  };
-
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null); 
   const [view, setView] = useState('landing');
@@ -79,7 +71,7 @@ function App() {
   // ✅ FIX: Added the missing auth syncing state
   const [isAuthSyncing, setIsAuthSyncing] = useState(true);
 
-  useEffect(() => {
+ useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (userRole === 'GUEST') return; 
 
@@ -101,7 +93,6 @@ function App() {
           else setView('onboarding'); 
 
         } catch (error) {
-          // ✅ FIX: Actually handle the error instead of silently failing
           console.error("Failed to fetch user role.", error);
           toast.error("Failed to connect to the server. Please try again.");
           await signOut(auth); // Safely log them out
@@ -116,14 +107,19 @@ function App() {
       }
     });
 
-    // Auto-show onboarding tour for new users
-    const hasSeenTour = localStorage.getItem('tuk_tour_completed');
-    if (currentUser && !hasSeenTour && !userRole) {
-      // Delay tour start to allow UI to render
-      setTimeout(() => setShowOnboardingTour(true), 2000);
-    }
     return () => unsubscribe();
   }, [userRole]);
+
+  // ✅ MOVED TOUR LOGIC INTO ITS OWN EFFECT
+  useEffect(() => {
+    const hasSeenTour = localStorage.getItem('tuk_tour_completed');
+    // We use the 'user' state variable here, NOT 'currentUser'
+    if (user && !hasSeenTour && !userRole) {
+      // Delay tour start to allow UI to render
+      const timer = setTimeout(() => setShowOnboardingTour(true), 2000);
+      return () => clearTimeout(timer); // cleanup timer
+    }
+  }, [user, userRole]);
 
   const handleGuestLogin = () => {
     setUser({

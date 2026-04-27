@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
-const Joyride = JoyrideModule.Joyride || JoyrideModule.default;
-const STATUS = JoyrideModule.STATUS || {};
 import { X, ChevronRight, SkipForward } from 'lucide-react';
+
+// Safe import for Vite CommonJS/ESM Interop
+import * as JoyrideModule from 'react-joyride';
+const Joyride = JoyrideModule.default ? JoyrideModule.default : JoyrideModule.Joyride || JoyrideModule;
+const STATUS = JoyrideModule.STATUS || {};
 
 const OnboardingTour = ({ run, onComplete, user, userRole, view, masterProfile }) => {
   const [steps, setSteps] = useState([]);
