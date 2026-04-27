@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Joyride, STATUS } from 'react-joyride';
+import Joyride, { STATUS } from 'react-joyride';
 import { X, ChevronRight, SkipForward } from 'lucide-react';
 
 const OnboardingTour = ({ run, onComplete, user, userRole, view, masterProfile }) => {
