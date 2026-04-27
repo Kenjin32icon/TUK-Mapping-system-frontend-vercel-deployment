@@ -1,6 +1,7 @@
 import React from 'react';
 import SkillList from '../shared/SkillList'; // ⬅️ UPDATED PATH
-import { Download, BrainCircuit, TrendingUp, Target, Activity, Info } from 'lucide-react';
+import ShareModal from '../shared/ShareModal'; // ⬅️ NEW IMPORT
+import { Download, BrainCircuit, TrendingUp, Target, Activity, Info, Share2 } from 'lucide-react';
 import { 
   Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip,
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Cell
@@ -41,6 +42,7 @@ const AffiliateCard = ({ roleTitle }) => {
 };
 
 export default function DashboardView({ user, profile, masterProfile, onDownload, onGenerateMaster, isSynthesizing, isGuest }) {
+  const [showShareModal, setShowShareModal] = React.useState(false);
   const activeProfile = masterProfile || profile;
 
   const radarData = (activeProfile?.skills?.technical || []).slice(0, 6).map((skill) => ({
@@ -91,6 +93,16 @@ export default function DashboardView({ user, profile, masterProfile, onDownload
             <BrainCircuit className="w-5 h-5" /> 
             {isSynthesizing ? 'Synthesizing...' : (masterProfile ? 'Update Master Profile' : 'Generate Master Profile')}
           </button>
+          
+          {masterProfile && (
+            <button 
+              onClick={() => setShowShareModal(true)}
+              className="p-3 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 rounded-xl transition-colors"
+              title="Share your profile"
+            >
+              <Share2 className="w-5 h-5" />
+            </button>
+          )}
           
           <button onClick={onDownload} className="p-3 bg-slate-800 text-slate-300 hover:text-white hover:bg-slate-700 rounded-xl transition-colors">
             <Download className="w-5 h-5" />
@@ -156,6 +168,16 @@ export default function DashboardView({ user, profile, masterProfile, onDownload
       {!isGuest && (
         <AffiliateCard roleTitle={activeProfile?.recommended_role?.title} />
       )}
+
+      {/* SHARE MODAL */}
+      <ShareModal
+        isOpen={showShareModal}
+        onClose={() => setShowShareModal(false)}
+        title="TU-K Talent Profile"
+        description={`Check out my AI-generated career profile as a ${activeProfile?.recommended_role?.title || 'Professional'}`}
+        url={`${window.location.origin}/profile/${user?.uid}`}
+        user={user}
+      />
 
     </div>
   );
