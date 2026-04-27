@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import html2pdf from 'html2pdf.js';
+import Confetti from 'react-confetti';
+import { useWindowSize } from 'react-use';
 import { onAuthStateChanged, signOut, signInWithPopup } from 'firebase/auth'; // ✅ Added signInWithPopup
 import { auth, googleProvider } from './firebase';
 import { Toaster, toast } from 'react-hot-toast';
@@ -61,6 +63,8 @@ function App() {
   const [portfolioData, setPortfolioData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [isSynthesizing, setIsSynthesizing] = useState(false);
+  const [showFireworks, setShowFireworks] = useState(false);
+  const { width, height } = useWindowSize();
 
   // ✅ FIX: Added the missing auth syncing state
   const [isAuthSyncing, setIsAuthSyncing] = useState(true);
@@ -170,7 +174,12 @@ function App() {
         headers: { Authorization: `Bearer ${token}` }
       });
       setMasterProfile(response.data);
-      toast.success("Master Profile generated!");
+
+      // TRIGGER FIREWORKS
+      setShowFireworks(true);
+      setTimeout(() => setShowFireworks(false), 6000);
+
+      toast.success('Master Profile generated successfully!');
       setView('dashboard'); 
     } catch (error) {
       toast.error("Could not generate Master Profile. Make sure you have uploaded at least 2 documents.");
@@ -231,6 +240,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
+      {showFireworks && <Confetti width={width} height={height} recycle={false} numberOfPieces={500} />}
       <Toaster position="top-right" />
       <Navbar 
         user={user} 
