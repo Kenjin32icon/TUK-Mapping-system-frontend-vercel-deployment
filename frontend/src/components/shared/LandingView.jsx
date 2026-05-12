@@ -30,7 +30,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
             <div>
               <h3 className="font-bold text-amber-900 text-base">Document Upload is Required</h3>
               <p className="text-amber-800 text-sm mt-1 leading-relaxed">
-                To fully use this system, you <strong>must upload at least 2 documents</strong> — your CV, academic transcripts, project reports, or professional certificates. Without them, the AI cannot generate your career analysis.
+                To fully use this system, you <strong>must upload at least 2 documents</strong> your CV, academic transcripts, project reports, or professional certificates. Without them, the AI cannot generate your career analysis.
               </p>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
             {
               step: '3',
               title: 'Generate Your Master Profile',
-              body: 'Receive a targeted career path, market readiness score, sector demand analysis, and a downloadable AI portfolio — all from your own documents.'
+              body: 'Receive a targeted career path, market readiness score, sector demand analysis, and a downloadable AI portfolio all from your own documents.'
             },
           ].map(({ step, title, body }) => (
             <div key={step} className="flex items-start gap-3">
