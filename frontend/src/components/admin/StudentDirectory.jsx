@@ -23,7 +23,7 @@ export default function StudentDirectory({ students, loading }) {
             placeholder="Search by name or sector..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:border-emerald-500 outline-none" 
+            className="w-full pl-9 pr-4 py-2 rounded-xl border border-slate-200 text-sm focus:border-primary-500 outline-none" 
           />
         </div>
       </div>
@@ -31,7 +31,7 @@ export default function StudentDirectory({ students, loading }) {
       {/* Directory Table */}
       <div className="overflow-x-auto">
         {loading ? (
-          <div className="flex justify-center p-12"><Loader2 className="w-8 h-8 animate-spin text-emerald-600" /></div>
+          <div className="flex justify-center p-12"><Loader2 className="w-8 h-8 animate-spin text-primary-600" /></div>
         ) : (
           <table className="w-full text-left text-sm">
             <thead className="bg-slate-50 text-slate-500 uppercase font-bold text-xs">
@@ -53,12 +53,12 @@ export default function StudentDirectory({ students, loading }) {
                       {student.phone && <span className="flex items-center gap-1"><Phone className="w-3 h-3"/> {student.phone}</span>}
                     </div>
                   </td>
-                  <td className="p-4 font-medium text-emerald-700">{student.role || "Pending Analysis"}</td>
+                  <td className="p-4 font-medium text-primary-700">{student.role || "Pending Analysis"}</td>
                   <td className="p-4 text-slate-600 font-medium">{student.bestSector || "N/A"}</td>
                   <td className="p-4">
                     <div className="flex items-center gap-2">
                       <div className="w-full bg-slate-200 rounded-full h-2 max-w-[80px]">
-                        <div className={`h-2 rounded-full ${student.readiness > 70 ? 'bg-emerald-500' : 'bg-amber-500'}`} style={{ width: `${student.readiness || 0}%` }}></div>
+                        <div className={`h-2 rounded-full ${student.readiness > 70 ? 'bg-primary-500' : 'bg-amber-500'}`} style={{ width: `${student.readiness || 0}%` }}></div>
                       </div>
                       <span className="font-bold text-slate-700">{student.readiness || 0}%</span>
                     </div>
@@ -108,11 +108,11 @@ export default function StudentDirectory({ students, loading }) {
             <div className="p-6 space-y-6">
               
               {/* Pre-generated AI Description (Executive Summary) */}
-              <div className="bg-emerald-50 border border-emerald-100 p-5 rounded-2xl">
-                <h3 className="text-emerald-800 font-bold text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
+              <div className="bg-primary-50 border border-primary-100 p-5 rounded-2xl">
+                <h3 className="text-primary-800 font-bold text-sm uppercase tracking-wider mb-2 flex items-center gap-2">
                   <Award className="w-4 h-4" /> AI Student Overview
                 </h3>
-                <p className="text-emerald-900 leading-relaxed text-sm">
+                <p className="text-primary-900 leading-relaxed text-sm">
                   {/* Fallback chain in case the prompt structure varies slightly */}
                   {selectedStudent.masterProfile?.executive_summary || 
                    selectedStudent.bio || 
@@ -131,7 +131,7 @@ export default function StudentDirectory({ students, loading }) {
                 </div>
                 <div className="border border-slate-200 p-4 rounded-2xl">
                   <p className="text-xs text-slate-500 font-bold uppercase mb-1">Market Readiness Score</p>
-                  <p className="text-lg font-black text-emerald-600">
+                  <p className="text-lg font-black text-primary-600">
                     {selectedStudent.masterProfile?.kenyan_market_alignment?.market_readiness_score || selectedStudent.readiness || 0}/100
                   </p>
                 </div>
@@ -163,7 +163,7 @@ export default function StudentDirectory({ students, loading }) {
             <div className="p-6 border-t border-slate-100 bg-slate-50 rounded-b-3xl flex justify-end gap-3">
               <a 
                 href={`mailto:${selectedStudent.email}`}
-                className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-colors"
+                className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl transition-colors"
               >
                 Contact Student
               </a>

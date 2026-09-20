@@ -29,13 +29,13 @@ const AffiliateCard = ({ roleTitle }) => {
   }
 
   return (
-    <div className="bg-gradient-to-r from-emerald-600 to-teal-700 p-6 rounded-3xl shadow-lg text-white mt-8 flex flex-col md:flex-row items-center justify-between">
+    <div className="bg-gradient-to-r from-primary-600 to-teal-700 p-6 rounded-3xl shadow-lg text-white mt-8 flex flex-col md:flex-row items-center justify-between">
       <div>
         <h3 className="text-lg font-bold flex items-center gap-2">
-          <Target className="w-5 h-5 text-emerald-200" />
+          <Target className="w-5 h-5 text-primary-200" />
           Essential Gear for {roleTitle || "Your Career"}
         </h3>
-        <p className="text-emerald-100 text-sm mt-1 max-w-md">
+        <p className="text-primary-100 text-sm mt-1 max-w-md">
           To succeed as a top-tier professional in this sector, having the right setup is crucial. Upgrade your {gear.category} setup with the best student deals.
         </p>
       </div>
@@ -43,7 +43,7 @@ const AffiliateCard = ({ roleTitle }) => {
         href={gear.link}
         target="_blank"
         rel="noopener noreferrer"
-        className="mt-4 md:mt-0 px-6 py-3 bg-white text-emerald-700 font-bold rounded-xl hover:bg-emerald-50 transition-colors shadow-sm text-sm"
+        className="mt-4 md:mt-0 px-6 py-3 bg-white text-primary-700 font-bold rounded-xl hover:bg-primary-50 transition-colors shadow-sm text-sm"
       >
         Shop {gear.item}
       </a>
@@ -59,8 +59,8 @@ const EmptyStateBanner = ({ onUploadClick, onGenerateMaster, isSynthesizing, doc
     {/* Step-by-step guidance card */}
     <div className="bg-gradient-to-br from-slate-900 to-slate-800 text-white p-8 rounded-3xl shadow-xl">
       <div className="flex items-start gap-4 mb-6">
-        <div className="w-12 h-12 bg-emerald-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
-          <Sparkles className="w-6 h-6 text-emerald-400" />
+        <div className="w-12 h-12 bg-primary-500/20 rounded-2xl flex items-center justify-center flex-shrink-0">
+          <Sparkles className="w-6 h-6 text-primary-400" />
         </div>
         <div>
           <h2 className="text-2xl font-bold mb-1">Your Dashboard is Ready</h2>
@@ -73,7 +73,7 @@ const EmptyStateBanner = ({ onUploadClick, onGenerateMaster, isSynthesizing, doc
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         {/* Step 1 */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-sm font-bold">1</div>
+          <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-sm font-bold">1</div>
           <div className="w-10 h-10 bg-blue-500/20 rounded-xl flex items-center justify-center">
             <UploadCloud className="w-5 h-5 text-blue-400" />
           </div>
@@ -85,7 +85,7 @@ const EmptyStateBanner = ({ onUploadClick, onGenerateMaster, isSynthesizing, doc
           </div>
           <button
             onClick={onUploadClick}
-            className="mt-auto w-full py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+            className="mt-auto w-full py-2.5 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
           >
             <UploadCloud className="w-4 h-4" /> Upload Now
           </button>
@@ -93,9 +93,9 @@ const EmptyStateBanner = ({ onUploadClick, onGenerateMaster, isSynthesizing, doc
 
         {/* Step 2 */}
         <div className="bg-white/5 border border-white/10 rounded-2xl p-5 flex flex-col gap-3">
-          <div className="w-8 h-8 rounded-full bg-emerald-500 flex items-center justify-center text-sm font-bold">2</div>
-          <div className="w-10 h-10 bg-emerald-500/20 rounded-xl flex items-center justify-center">
-            <BrainCircuit className="w-5 h-5 text-emerald-400" />
+          <div className="w-8 h-8 rounded-full bg-primary-500 flex items-center justify-center text-sm font-bold">2</div>
+          <div className="w-10 h-10 bg-primary-500/20 rounded-xl flex items-center justify-center">
+            <BrainCircuit className="w-5 h-5 text-primary-400" />
           </div>
           <div>
             <h4 className="font-bold text-white mb-1">Generate Master Profile</h4>
@@ -106,7 +106,7 @@ const EmptyStateBanner = ({ onUploadClick, onGenerateMaster, isSynthesizing, doc
           <button
             onClick={onGenerateMaster}
             disabled={isSynthesizing || documentCount < 1}
-            className="mt-auto w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:opacity-40 text-white font-semibold rounded-xl text-sm transition-colors flex items-center justify-center gap-2"
+            className="btn-primary mt-auto w-full py-2.5"
           >
             <BrainCircuit className="w-4 h-4" />
             {isSynthesizing ? 'Generating...' : 'Generate Profile'}
@@ -214,7 +214,9 @@ export default function DashboardView({
   }));
 
   const sectorData = activeProfile?.sector_demand || [{ sector: "General Tech", demand_percentage: 50 }];
-  const COLORS = ['#10b981', '#3b82f6', '#8b5cf6', '#f59e0b'];
+  // Matches --chart-categorical in App.css — keep any other chart in the
+  // app using this same 4-color order for visual consistency.
+  const COLORS = ['#10b981', '#3b82f6', '#a855f7', '#f59e0b'];
 
   return (
     <div className="flex flex-col space-y-8 animate-in fade-in duration-500 max-w-4xl mx-auto" id="master-dashboard-export">
@@ -251,14 +253,14 @@ export default function DashboardView({
             <div className="flex gap-2">
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="inline-flex items-center rounded-xl border border-amber-400 bg-white px-4 py-2 text-sm font-semibold text-amber-700 hover:bg-amber-50"
+                className="inline-flex items-center rounded-xl border border-warning-400 bg-white px-4 py-2 text-sm font-semibold text-warning-700 hover:bg-warning-50"
               >
                 Add More
               </button>
               <button
                 onClick={onGenerateMaster}
                 disabled={isSynthesizing}
-                className="inline-flex items-center gap-1.5 rounded-xl bg-amber-600 px-4 py-2 text-sm font-semibold text-white hover:bg-amber-500"
+                className="btn-primary py-2"
               >
                 <BrainCircuit className="w-4 h-4" />
                 {isSynthesizing ? 'Generating...' : 'Generate Now'}
@@ -282,16 +284,16 @@ export default function DashboardView({
       {/* ── PROFILE ACTION BAR — always visible when user is logged in ─────── */}
       <div className="bg-slate-900 text-white p-6 rounded-3xl shadow-xl flex flex-col md:flex-row items-center justify-between gap-4 profile-action-bar">
         <div className="flex items-center gap-4">
-          <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center border-2 border-emerald-500 overflow-hidden flex-shrink-0">
+          <div className="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center border-2 border-primary-500 overflow-hidden flex-shrink-0">
             {user?.photoURL ? (
               <img src={user.photoURL} alt="Profile" crossOrigin="anonymous" className="w-full h-full object-cover" />
             ) : (
-              <span className="text-xl font-bold text-emerald-400">{user?.displayName?.[0] || '?'}</span>
+              <span className="text-xl font-bold text-primary-400">{user?.displayName?.[0] || '?'}</span>
             )}
           </div>
           <div>
             <h2 className="text-2xl font-bold">{user?.displayName}</h2>
-            <p className="text-emerald-400 font-medium text-sm">
+            <p className="text-primary-400 font-medium text-sm">
               {activeProfile?.recommended_role?.title || (isGuest ? 'Demo Profile' : 'Upload documents to get started')}
             </p>
           </div>
@@ -301,7 +303,7 @@ export default function DashboardView({
           <button
             onClick={onGenerateMaster}
             disabled={isSynthesizing}
-            className="flex-1 md:flex-none px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 transition-colors disabled:opacity-50"
+            className="btn-primary flex-1 md:flex-none px-5 py-3 font-bold"
           >
             <BrainCircuit className="w-5 h-5" />
             {isSynthesizing ? 'Synthesizing...' : (masterProfile ? 'Update Master Profile' : 'Generate Master Profile')}
@@ -309,7 +311,7 @@ export default function DashboardView({
 
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="hidden md:inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-800 px-4 py-3 text-sm font-semibold text-slate-200 hover:bg-slate-700"
+            className="btn-secondary-dark hidden md:inline-flex px-4 py-3"
           >
             <UploadCloud className="w-4 h-4" /> Upload
           </button>
@@ -349,7 +351,7 @@ export default function DashboardView({
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 h-80 flex flex-col">
               <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm uppercase">
-                <Target className="w-4 h-4 text-emerald-500" /> Competency Spread
+                <Target className="w-4 h-4 text-primary-500" /> Competency Spread
               </h3>
               <div className="flex-1 w-full">
                 <ResponsiveContainer width="100%" height="100%">

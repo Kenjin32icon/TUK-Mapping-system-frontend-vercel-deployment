@@ -61,7 +61,7 @@ export default function ProfileSettings({ user, isAdmin }) {
     <div className="max-w-3xl mx-auto space-y-6 animate-in fade-in duration-500">
       <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
         <h2 className="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-          <Settings className="w-6 h-6 text-emerald-600" /> Account Settings
+          <Settings className="w-6 h-6 text-primary-600" /> Account Settings
         </h2>
 
         <div className="flex items-center gap-6 mb-8 p-6 bg-slate-50 rounded-2xl border border-slate-100">
@@ -77,7 +77,7 @@ export default function ProfileSettings({ user, isAdmin }) {
               <Mail className="w-4 h-4" /> {user?.email}
             </p>
             {isAdmin && (
-              <span className="mt-2 inline-flex items-center gap-1 px-2.5 py-1 bg-emerald-100 text-emerald-700 text-xs font-bold uppercase rounded-md">
+              <span className="mt-2 inline-flex items-center gap-1 px-2.5 py-1 bg-primary-100 text-primary-700 text-xs font-bold uppercase rounded-md">
                 <Shield className="w-3 h-3" /> System Administrator
               </span>
             )}
@@ -93,7 +93,7 @@ export default function ProfileSettings({ user, isAdmin }) {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+254 700 000000" 
-                className="w-full border border-slate-200 p-3 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                className="w-full border border-slate-200 p-3 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               />
               {phone && (
                 <div className="mt-2 flex gap-2">
@@ -121,7 +121,7 @@ export default function ProfileSettings({ user, isAdmin }) {
                 value={portfolio}
                 onChange={(e) => setPortfolio(e.target.value)}
                 placeholder="https://linkedin.com/in/..." 
-                className="w-full border border-slate-200 p-3 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                className="w-full border border-slate-200 p-3 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               />
             </div>
           </div>
@@ -136,7 +136,7 @@ export default function ProfileSettings({ user, isAdmin }) {
                 value={twitter}
                 onChange={(e) => setTwitter(e.target.value)}
                 placeholder="@username or https://x.com/username" 
-                className="w-full border border-slate-200 p-3 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                className="w-full border border-slate-200 p-3 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               />
             </div>
             <div>
@@ -148,7 +148,7 @@ export default function ProfileSettings({ user, isAdmin }) {
                 value={instagram}
                 onChange={(e) => setInstagram(e.target.value)}
                 placeholder="@username or https://instagram.com/username" 
-                className="w-full border border-slate-200 p-3 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                className="w-full border border-slate-200 p-3 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               />
             </div>
             <div>
@@ -160,7 +160,7 @@ export default function ProfileSettings({ user, isAdmin }) {
                 value={tiktok}
                 onChange={(e) => setTiktok(e.target.value)}
                 placeholder="@username or https://tiktok.com/@username" 
-                className="w-full border border-slate-200 p-3 rounded-xl focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 outline-none transition-all"
+                className="w-full border border-slate-200 p-3 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 outline-none transition-all"
               />
             </div>
           </div>

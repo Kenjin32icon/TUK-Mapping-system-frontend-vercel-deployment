@@ -23,12 +23,12 @@ export default function PortfolioView({ portfolioData, onBack, onDownload }) {
         <div className="flex gap-2">
           <button 
             onClick={() => setShowShareModal(true)}
-            className="p-3 bg-slate-800 hover:bg-blue-600 rounded-xl transition-colors"
+            className="p-3 bg-slate-800 hover:bg-primary-600 rounded-xl transition-colors"
             title="Share portfolio"
           >
             <Share2 className="w-6 h-6" />
           </button>
-          <button onClick={onDownload} className="p-3 bg-slate-800 hover:bg-blue-600 rounded-xl transition-colors">
+          <button onClick={onDownload} className="p-3 bg-slate-800 hover:bg-primary-600 rounded-xl transition-colors">
             <Download className="w-6 h-6" />
           </button>
         </div>
@@ -55,7 +55,7 @@ export default function PortfolioView({ portfolioData, onBack, onDownload }) {
                 <p className="text-xs font-bold text-slate-400 uppercase mb-3 flex items-center gap-2"><Code className="w-4 h-4"/> Tech Stack</p>
                 <div className="flex flex-wrap gap-2">
                   {project.tech_stack.map((tech, i) => (
-                    <span key={i} className="bg-emerald-100 text-emerald-800 text-xs px-2 py-1 rounded-md font-bold">{tech}</span>
+                    <span key={i} className="bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded-md font-bold">{tech}</span>
                   ))}
                 </div>
               </div>

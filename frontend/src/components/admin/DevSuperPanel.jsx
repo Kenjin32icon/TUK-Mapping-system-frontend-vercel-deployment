@@ -122,7 +122,7 @@ export default function DevSuperPanel() {
                       <td className="p-4 text-slate-600">{new Date(u.createdAt).toLocaleDateString()}</td>
                       <td className="p-4">
                         {u.masterProfile ? (
-                          <span className="px-2 py-1 bg-emerald-100 text-emerald-700 rounded-md text-xs font-bold">YES</span>
+                          <span className="px-2 py-1 bg-primary-100 text-primary-700 rounded-md text-xs font-bold">YES</span>
                         ) : (
                           <span className="px-2 py-1 bg-slate-100 text-slate-500 rounded-md text-xs font-bold">NO</span>
                         )}
@@ -155,7 +155,7 @@ export default function DevSuperPanel() {
       {activeTab === 'logs' && (
         <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
           <div className="p-6 border-b border-slate-100 bg-slate-50">
-            <h3 className="font-bold text-slate-800 flex items-center gap-2"><Activity className="w-5 h-5 text-emerald-500"/> Real-time System Audit</h3>
+            <h3 className="font-bold text-slate-800 flex items-center gap-2"><Activity className="w-5 h-5 text-primary-500"/> Real-time System Audit</h3>
             <p className="text-xs text-slate-500 mt-1">Showing latest 100 system events.</p>
           </div>
           <div className="overflow-x-auto">
@@ -193,3 +193,4 @@ export default function DevSuperPanel() {
     </div>
   );
 }
+

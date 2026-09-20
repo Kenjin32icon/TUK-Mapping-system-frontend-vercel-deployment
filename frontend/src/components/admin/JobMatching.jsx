@@ -35,7 +35,7 @@ export default function JobMatching() {
         <textarea 
           value={jd}
           onChange={(e) => setJd(e.target.value)}
-          className="w-full flex-1 min-h-[250px] border border-slate-200 rounded-xl p-4 text-sm focus:border-emerald-500 outline-none resize-none bg-slate-50"
+          className="w-full flex-1 min-h-[250px] border border-slate-200 rounded-xl p-4 text-sm focus:border-primary-500 outline-none resize-none bg-slate-50"
           placeholder="e.g. We are looking for a Junior Python Developer familiar with Django, PostgreSQL, and basic Cloud deployment on AWS..."
         ></textarea>
         <button 
@@ -63,16 +63,16 @@ export default function JobMatching() {
         {matches && (
           <div className="space-y-4 overflow-y-auto pr-2">
             {matches.map((match, idx) => (
-              <div key={idx} className="bg-white p-5 rounded-2xl shadow-sm border border-emerald-100 relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-emerald-100 text-emerald-800 font-black text-xs px-3 py-1 rounded-bl-xl">
+              <div key={idx} className="bg-white p-5 rounded-2xl shadow-sm border border-primary-100 relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-primary-100 text-primary-800 font-black text-xs px-3 py-1 rounded-bl-xl">
                   {match.matchPercentage}% MATCH
                 </div>
                 <h4 className="font-bold text-slate-800 text-lg pr-16">{match.name}</h4>
                 <p className="text-xs text-slate-400 mb-3">{match.email}</p>
-                <div className="bg-emerald-50 p-3 rounded-xl border border-emerald-100 mb-4">
-                  <p className="text-sm text-emerald-900 leading-relaxed font-medium">"{match.reason}"</p>
+                <div className="bg-primary-50 p-3 rounded-xl border border-primary-100 mb-4">
+                  <p className="text-sm text-primary-900 leading-relaxed font-medium">"{match.reason}"</p>
                 </div>
-                <button className="w-full py-2 bg-slate-100 hover:bg-emerald-600 hover:text-white text-slate-700 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
+                <button className="w-full py-2 bg-slate-100 hover:bg-primary-600 hover:text-white text-slate-700 text-sm font-bold rounded-lg transition-colors flex items-center justify-center gap-2">
                   <Send className="w-4 h-4" /> Notify Candidate
                 </button>
               </div>
@@ -83,3 +83,4 @@ export default function JobMatching() {
     </div>
   );
 }
+

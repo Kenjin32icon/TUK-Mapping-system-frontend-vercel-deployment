@@ -19,14 +19,11 @@ export default function Navbar({ user, userRole, view, setView, handleLogout, ma
       <div className="container mx-auto px-4 py-4 max-w-6xl flex justify-between items-center">
         
         {/* Branding */}
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => navigate(isAnyAdmin ? 'admin_dashboard' : 'dashboard')}>
-          <a href="/" className="flex items-center gap-3">
-  <img src="/tuk-skills-map-logo.png" alt="TUK Skills Map Logo" className="w-10 h-10 object-contain rounded-lg shadow-sm" />
-  <div className="hidden sm:block">
-    <p className="text-xs ...">TUK Skills Map</p>
-    <h1 className="text-xl ...">Talent Portal</h1>
-  </div>
-</a>
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate(isAnyAdmin ? 'admin_dashboard' : 'dashboard')}
+        >
+          <img src="/tuk-skills-map-logo.png" alt="TUK Skills Map Logo" className="w-10 h-10 object-contain rounded-lg shadow-sm" />
           <div className="hidden sm:block">
             <p className="text-xs font-semibold text-slate-500 uppercase tracking-[0.24em]">TUK Skills Map</p>
             <h1 className="text-xl font-bold text-slate-800">
@@ -40,7 +37,7 @@ export default function Navbar({ user, userRole, view, setView, handleLogout, ma
           <span className="text-sm font-medium text-slate-600 hidden sm:block">
             {user.displayName}
           </span>
-          <img src={user.photoURL} alt="Profile" crossOrigin="anonymous" className="w-10 h-10 rounded-full border-2 border-emerald-600 shadow-sm" />
+          <img src={user.photoURL} alt="Profile" crossOrigin="anonymous" className="w-10 h-10 rounded-full border-2 border-primary-600 shadow-sm" />
           
           <button onClick={() => setMenuOpen(!menuOpen)} className="p-2 hover:bg-slate-50 rounded-lg transition-colors">
             {menuOpen ? <X className="w-6 h-6 text-slate-600" /> : <Menu className="w-6 h-6 text-slate-600" />}
@@ -59,7 +56,7 @@ export default function Navbar({ user, userRole, view, setView, handleLogout, ma
               
               {(userRole === 'UNIVERSITY_ADMIN' || userRole === 'SUPER_ADMIN') && (
                 <button onClick={() => navigate('admin_dashboard')} className="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 text-sm font-medium text-slate-700">
-                  <LayoutDashboard className="w-4 h-4 text-emerald-600"/> TU-K Control Center
+                  <LayoutDashboard className="w-4 h-4 text-primary-600"/> TU-K Control Center
                 </button>
               )}
 
@@ -67,10 +64,10 @@ export default function Navbar({ user, userRole, view, setView, handleLogout, ma
               {userRole === 'STUDENT' && (
                 <>
                   <button onClick={() => navigate('dashboard')} className="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 text-sm font-medium text-slate-700">
-                    <LayoutDashboard className="w-4 h-4 text-emerald-600"/> Main Dashboard
+                    <LayoutDashboard className="w-4 h-4 text-primary-600"/> Main Dashboard
                   </button>
                   <button onClick={() => navigate('onboarding')} className="w-full text-left px-4 py-3 hover:bg-slate-50 flex items-center gap-3 text-sm font-medium text-slate-700">
-                    <UploadCloud className="w-4 h-4 text-emerald-500"/> Upload Documents
+                    <UploadCloud className="w-4 h-4 text-primary-500"/> Upload Documents
                   </button>
                   
                   <hr className="my-1 border-slate-100" />
@@ -79,13 +76,13 @@ export default function Navbar({ user, userRole, view, setView, handleLogout, ma
                   {masterProfile ? (
                     <div className="bg-slate-50 py-1 module-navigation">
                        <p className="px-4 py-1 text-xs font-bold text-slate-400 uppercase">Master Modules</p>
-                       <button onClick={() => navigate('module_skills')} className="w-full text-left px-4 py-2 hover:bg-emerald-100 flex items-center gap-3 text-sm font-medium text-slate-700">
+                       <button onClick={() => navigate('module_skills')} className="w-full text-left px-4 py-2 hover:bg-primary-100 flex items-center gap-3 text-sm font-medium text-slate-700">
                          Skills Analysis
                        </button>
-                       <button onClick={() => navigate('module_market')} className="w-full text-left px-4 py-2 hover:bg-emerald-100 flex items-center gap-3 text-sm font-medium text-slate-700">
+                       <button onClick={() => navigate('module_market')} className="w-full text-left px-4 py-2 hover:bg-primary-100 flex items-center gap-3 text-sm font-medium text-slate-700">
                          Market Alignment
                        </button>
-                       <button onClick={() => navigate('module_services')} className="w-full text-left px-4 py-2 hover:bg-emerald-100 flex items-center gap-3 text-sm font-medium text-slate-700">
+                       <button onClick={() => navigate('module_services')} className="w-full text-left px-4 py-2 hover:bg-primary-100 flex items-center gap-3 text-sm font-medium text-slate-700">
                          Recommended Services
                        </button>
                     </div>
@@ -118,3 +115,4 @@ export default function Navbar({ user, userRole, view, setView, handleLogout, ma
     </header>
   );
 }
+

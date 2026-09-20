@@ -43,7 +43,7 @@ const OnboardingTour = ({ run, onComplete, user, userRole, view, masterProfile }
               <p className="text-slate-600 mb-2">
                 Sign in with your Google account for full access to AI-powered career mapping, or explore as a guest to see the system in action.
               </p>
-              <p className="text-xs text-emerald-600 font-medium">💡 Pro tip: Guest mode lets you try all features!</p>
+              <p className="text-xs text-primary-600 font-medium">💡 Pro tip: Guest mode lets you try all features!</p>
             </div>
           ),
           placement: 'bottom',
@@ -92,7 +92,7 @@ const OnboardingTour = ({ run, onComplete, user, userRole, view, masterProfile }
                 This is your command center. Generate your Master Profile to unlock AI-powered career insights.
               </p>
               {!masterProfile && (
-                <p className="text-xs text-emerald-600 font-medium">💡 Click "Generate Master Profile" to get started!</p>
+                <p className="text-xs text-primary-600 font-medium">💡 Click "Generate Master Profile" to get started!</p>
               )}
             </div>
           ),
@@ -161,8 +161,8 @@ const OnboardingTour = ({ run, onComplete, user, userRole, view, masterProfile }
             <p className="text-slate-600 mb-4">
               Start exploring your career potential. Remember, you can always revisit this tour from the help menu.
             </p>
-            <div className="bg-emerald-50 p-3 rounded-lg">
-              <p className="text-sm text-emerald-800 font-medium">
+            <div className="bg-primary-50 p-3 rounded-lg">
+              <p className="text-sm text-primary-800 font-medium">
                 💡 <strong>Next steps:</strong> Upload documents → Generate Master Profile → Explore modules
               </p>
             </div>
@@ -184,7 +184,7 @@ const OnboardingTour = ({ run, onComplete, user, userRole, view, masterProfile }
 
   const customStyles = {
     options: {
-      primaryColor: '#10b981', // emerald-500
+      primaryColor: '#10b981', // primary-500
       textColor: '#1f2937', // slate-800
       backgroundColor: '#ffffff',
       overlayColor: 'rgba(0, 0, 0, 0.4)',
