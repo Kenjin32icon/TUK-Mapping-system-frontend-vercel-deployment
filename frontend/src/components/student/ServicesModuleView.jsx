@@ -20,7 +20,7 @@ export default function ServicesModuleView({ masterProfile, onPrepare }) {
         </div>
         <button 
           onClick={() => setShowShareModal(true)}
-          className="p-3 bg-slate-800 hover:bg-blue-600 rounded-xl transition-colors"
+          className="p-3 bg-slate-800 hover:bg-primary-600 rounded-xl transition-colors"
           title="Share services"
         >
           <Share2 className="w-6 h-6" />
@@ -30,7 +30,7 @@ export default function ServicesModuleView({ masterProfile, onPrepare }) {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {services.map((service, idx) => (
           <div key={idx} className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 hover:shadow-md transition-shadow relative overflow-hidden group">
-            <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-primary-500/10 rounded-bl-full -z-10 group-hover:scale-110 transition-transform"></div>
             
             <div className="flex justify-between items-start mb-4">
               <div className="p-3 bg-blue-50 rounded-xl text-blue-600">
@@ -38,8 +38,8 @@ export default function ServicesModuleView({ masterProfile, onPrepare }) {
               </div>
               <div className="text-right">
                 <p className="text-xs font-bold text-slate-400 uppercase">Demand Score</p>
-                <p className="text-lg font-black text-emerald-500 flex items-center gap-1 justify-end">
-                  {service.demand_score}% <Star className="w-4 h-4 fill-emerald-500" />
+                <p className="text-lg font-black text-primary-500 flex items-center gap-1 justify-end">
+                  {service.demand_score}% <Star className="w-4 h-4 fill-primary-500" />
                 </p>
               </div>
             </div>
@@ -71,3 +71,4 @@ export default function ServicesModuleView({ masterProfile, onPrepare }) {
     </div>
   );
 }
+

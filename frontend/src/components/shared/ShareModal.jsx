@@ -43,7 +43,7 @@ export default function ShareModal({ isOpen, onClose, title, description, url, u
         <div className="p-6">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-              <Share2 className="w-5 h-5 text-emerald-600" /> Share {title}
+              <Share2 className="w-5 h-5 text-primary-600" /> Share {title}
             </h3>
             <button onClick={onClose} className="p-2 hover:bg-slate-100 rounded-xl transition-colors">
               <X className="w-5 h-5 text-slate-500" />

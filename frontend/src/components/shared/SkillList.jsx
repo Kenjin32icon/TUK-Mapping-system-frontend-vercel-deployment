@@ -14,7 +14,7 @@ export default function SkillList({ title, skills }) {
       <h3 className="font-bold text-slate-800 mb-3 text-sm uppercase tracking-wider">{title}</h3>
       <div className="flex flex-wrap gap-2">
         {visibleSkills.map((skill, index) => (
-          <span key={index} className="px-3 py-1 bg-emerald-50 text-emerald-700 rounded-lg text-xs font-semibold border border-emerald-100">
+          <span key={index} className="px-3 py-1 bg-primary-50 text-primary-700 rounded-lg text-xs font-semibold border border-primary-100">
             {skill}
           </span>
         ))}
@@ -35,3 +35,4 @@ export default function SkillList({ title, skills }) {
     </div>
   );
 }
+

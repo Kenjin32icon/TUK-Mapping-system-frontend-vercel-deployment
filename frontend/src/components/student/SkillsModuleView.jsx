@@ -11,7 +11,7 @@ export default function SkillsModuleView({ masterProfile }) {
     <div className="space-y-6 animate-in fade-in duration-500 max-w-5xl mx-auto">
       <div className="bg-slate-900 p-8 rounded-3xl text-white shadow-xl">
         <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
-          <Award className="w-8 h-8 text-emerald-400" /> Comprehensive Skills Analysis
+          <Award className="w-8 h-8 text-primary-400" /> Comprehensive Skills Analysis
         </h2>
         <p className="text-slate-400">A deep dive into your technical proficiencies and interpersonal capabilities.</p>
       </div>
@@ -20,13 +20,13 @@ export default function SkillsModuleView({ masterProfile }) {
         {/* Technical Skills Column */}
         <div className="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
           <h3 className="text-xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-            <Code className="w-6 h-6 text-emerald-500" /> Hard / Technical Skills
+            <Code className="w-6 h-6 text-primary-500" /> Hard / Technical Skills
           </h3>
           <div className="space-y-4">
             {techSkills.map((skill, idx) => (
               <div key={idx} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
                 <span className="font-medium text-slate-700">{skill}</span>
-                <CheckCircle className="w-5 h-5 text-emerald-400" />
+                <CheckCircle className="w-5 h-5 text-primary-400" />
               </div>
             ))}
             {techSkills.length === 0 && <p className="text-slate-500 italic">No technical skills extracted yet.</p>}
@@ -52,3 +52,4 @@ export default function SkillsModuleView({ masterProfile }) {
     </div>
   );
 }
+

@@ -252,8 +252,8 @@ function App() {
     return (
       <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center font-sans">
         <div className="relative w-20 h-20 mb-6">
-          <div className="absolute inset-0 border-4 border-emerald-500/20 rounded-full"></div>
-          <div className="absolute inset-0 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+          <div className="absolute inset-0 border-4 border-primary-500/20 rounded-full"></div>
+          <div className="absolute inset-0 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
         </div>
         <h2 className="text-2xl font-bold text-slate-800 mb-2">Connecting securely...</h2>
         <p className="text-slate-500 max-w-sm text-center">
@@ -299,8 +299,8 @@ function App() {
         {view === 'processing' && (
           <div className="flex flex-col items-center justify-center min-h-[60vh] gap-6 text-center">
             <div className="relative w-20 h-20">
-              <div className="absolute inset-0 border-4 border-emerald-500/20 rounded-full"></div>
-              <div className="absolute inset-0 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
+              <div className="absolute inset-0 border-4 border-primary-500/20 rounded-full"></div>
+              <div className="absolute inset-0 border-4 border-primary-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
             <h3 className="text-2xl font-bold text-slate-900">
               {isSynthesizing ? 'Synthesizing Master Profile...' : 'AI is mapping your potential...'}

@@ -15,7 +15,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
           <img src="/tuk-skills-map-logo.png" alt="TUK Logo" className="w-16 h-16 object-contain rounded-xl shadow-sm" />
           <div>
             <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">TU-K Talent Portal</h1>
-            <p className="text-emerald-600 font-bold tracking-wide uppercase text-sm">Powered by AI</p>
+            <p className="text-primary-600 font-bold tracking-wide uppercase text-sm">Powered by AI</p>
           </div>
         </div>
 
@@ -43,11 +43,11 @@ export default function LandingView({ onLogin, onGuestLogin }) {
               { icon: Layers, text: 'Access Services, Portfolio Builder, and Market Modules', req: false },
             ].map(({ icon: Icon, text, req }, i) => (
               <div key={i} className="flex items-center gap-3 bg-white rounded-xl px-4 py-3 border border-amber-100">
-                <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${req ? 'bg-amber-100' : 'bg-emerald-50'}`}>
-                  <Icon className={`w-4 h-4 ${req ? 'text-amber-600' : 'text-emerald-500'}`} />
+                <div className={`w-7 h-7 rounded-lg flex items-center justify-center flex-shrink-0 ${req ? 'bg-amber-100' : 'bg-primary-50'}`}>
+                  <Icon className={`w-4 h-4 ${req ? 'text-amber-600' : 'text-primary-500'}`} />
                 </div>
                 <p className="text-sm text-slate-700 font-medium flex-1">{text}</p>
-                {!req && <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />}
+                {!req && <CheckCircle className="w-4 h-4 text-primary-500 flex-shrink-0" />}
                 {req && <span className="text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-full border border-amber-200">Required</span>}
               </div>
             ))}
@@ -57,7 +57,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
         {/* How it works */}
         <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100 space-y-4">
           <h3 className="font-bold text-slate-900 text-lg flex items-center gap-2">
-            <BrainCircuit className="w-5 h-5 text-emerald-500" /> How it Works
+            <BrainCircuit className="w-5 h-5 text-primary-500" /> How it Works
           </h3>
 
           {[
@@ -85,8 +85,8 @@ export default function LandingView({ onLogin, onGuestLogin }) {
         </div>
 
         {/* Features unlocked after profile */}
-        <div className="bg-emerald-50 border border-emerald-200 rounded-2xl px-5 py-4">
-          <p className="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-3">Unlocked after Master Profile generation</p>
+        <div className="bg-primary-50 border border-primary-200 rounded-2xl px-5 py-4">
+          <p className="text-xs font-bold text-primary-700 uppercase tracking-wider mb-3">Unlocked after Master Profile generation</p>
           <div className="grid grid-cols-2 gap-2">
             {[
               '📊 Skills Analysis',
@@ -94,8 +94,8 @@ export default function LandingView({ onLogin, onGuestLogin }) {
               '💼 Service Recommendations',
               '📁 Portfolio Builder',
             ].map(f => (
-              <div key={f} className="flex items-center gap-2 text-sm text-emerald-800 font-medium">
-                <ChevronRight className="w-3 h-3 text-emerald-500 flex-shrink-0" />
+              <div key={f} className="flex items-center gap-2 text-sm text-primary-800 font-medium">
+                <ChevronRight className="w-3 h-3 text-primary-500 flex-shrink-0" />
                 {f}
               </div>
             ))}
@@ -110,7 +110,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
         <div className="text-left mb-6">
           <label className="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wider">Login as:</label>
           <select
-            className="w-full border-2 border-slate-100 p-3 rounded-xl bg-slate-50 focus:border-emerald-500 outline-none transition-all font-medium text-slate-700"
+            className="w-full border-2 border-slate-100 p-3 rounded-xl bg-slate-50 focus:border-primary-500 outline-none transition-all font-medium text-slate-700"
             value={loginRole}
             onChange={(e) => setLoginRole(e.target.value)}
           >
@@ -121,7 +121,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
 
         <button
           onClick={onLogin}
-          className="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-emerald-500/30 flex justify-center items-center gap-3 mb-4"
+          className="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white font-bold rounded-xl transition-all transform hover:scale-[1.02] shadow-lg shadow-primary-500/30 flex justify-center items-center gap-3 mb-4"
         >
           <svg className="w-5 h-5" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -157,7 +157,7 @@ export default function LandingView({ onLogin, onGuestLogin }) {
               Upload your documents (CV, transcripts, etc.)
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-600">
-              <BrainCircuit className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+              <BrainCircuit className="w-3.5 h-3.5 text-primary-500 flex-shrink-0" />
               Generate your AI Master Profile
             </div>
             <div className="flex items-center gap-2 text-xs text-slate-600">

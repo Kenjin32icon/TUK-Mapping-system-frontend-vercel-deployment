@@ -45,7 +45,7 @@ export default function AdminDashboardView() {
           <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">Institutional Control Center</h2>
           <p className="text-slate-400">Consolidated Master Profile Database & Analytics</p>
         </div>
-        <div className="bg-white/10 px-4 py-2 rounded-lg text-sm border border-emerald-500/30 text-emerald-400 font-medium tracking-wider">
+        <div className="bg-white/10 px-4 py-2 rounded-lg text-sm border border-primary-500/30 text-primary-400 font-medium tracking-wider">
           SYSTEM: MATERIALIZED STATE
         </div>
       </div>
@@ -56,7 +56,7 @@ export default function AdminDashboardView() {
           <button 
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-5 py-2.5 rounded-xl text-sm font-bold capitalize whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-emerald-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
+            className={`px-5 py-2.5 rounded-xl text-sm font-bold capitalize whitespace-nowrap transition-colors ${activeTab === tab ? 'bg-primary-600 text-white shadow-md' : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'}`}
           >
             {tab.replace('_', ' ')}
           </button>
@@ -76,7 +76,7 @@ export default function AdminDashboardView() {
           
           <div className="bg-white p-6 rounded-3xl shadow-sm border border-slate-100">
             <div className="flex items-center gap-4 mb-4">
-              <div className="p-3 bg-emerald-50 rounded-xl text-emerald-600"><TrendingUp /></div>
+              <div className="p-3 bg-primary-50 rounded-xl text-primary-600"><TrendingUp /></div>
               <p className="text-sm text-slate-500 font-bold uppercase">Avg Market Readiness</p>
             </div>
             <p className="text-4xl font-black text-slate-800">{averageReadiness}%</p>
@@ -99,3 +99,4 @@ export default function AdminDashboardView() {
     </div>
   );
 }
+
